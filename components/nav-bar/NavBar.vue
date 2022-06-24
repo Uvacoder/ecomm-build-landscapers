@@ -1,10 +1,10 @@
 <template>
-  <nav>
+  <nav class="navbar">
     <v-card :height="70">
       <v-app-bar :height="70" app>
-        <div class="px-4 d-flex align-center max-width w-100">
+        <div class="d-flex align-center max-width w-100">
           <img
-            class="cursor-pointer h-100"
+            class="cursor-pointer"
             src="/img/build-a-dream-logo.png"
             alt="Build A-Dream Logo"
             @click="$router.push('/')"
@@ -62,3 +62,11 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.navbar {
+  img {
+    width: 220px;
+  }
+}
+</style>

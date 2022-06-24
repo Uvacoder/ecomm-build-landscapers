@@ -1,84 +1,110 @@
 <template>
-  <div class="header">
-    <v-row
-      class="justify-space-around align-center ma-0 pa-0"
-      :style="`height: ${height}`"
-    >
-      <v-col class="text-center" cols="12" md="9">
-        <h1 v-if="title">{{ title }}</h1>
-        <h1 v-if="titleTwo">{{ titleTwo }}</h1>
-        <p v-if="subHeading">
-          {{ subHeading }}
-        </p>
-      </v-col>
-    </v-row>
-    <FuzzyImage
-      img="/img/background.jpg"
-      min-img="/img/background-min.jpg"
-      background
-    />
+  <div style="position: relative">
+    <v-carousel class="header" height="500" cycle hide-delimiters>
+      <v-carousel-item
+        :src="item.src"
+        v-for="(item, i) in items"
+        :key="i"
+        cover
+      />
+    </v-carousel>
+
+    <div class="header-text">
+      <div class="header-text-heading text-center">
+        <h1>Build A-Dream</h1>
+        <p>Dream gardens that don't cost the earth</p>
+      </div>
+
+      <!-- <p class="my-4">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent proin
+        ac bibend id ut ut suspendisse.
+      </p> -->
+
+      <!-- <div class="d-flex align-center mt-8">
+        <v-btn color="white" class="text-primary mr-1" density="comfortable">
+          Contact us
+        </v-btn>
+        <v-btn variant="outlined" density="comfortable"> View our work </v-btn>
+      </div> -->
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import FuzzyImage from "./fuzzy-image/FuzzyImage.vue";
-
 export default defineComponent({
   name: "Header",
-  components: {
-    FuzzyImage,
-  },
-  props: {
-    title: {
-      type: String,
-      default: "",
-    },
-    titleTwo: {
-      type: String,
-      default: "",
-    },
-    subHeading: {
-      type: String,
-      default: "",
-    },
-    height: {
-      type: String,
-      default: "65vh",
-    },
+  setup() {
+    const items = [
+      {
+        src: "/img/background.jpg",
+      },
+      {
+        src: "/img/background.jpg",
+      },
+      {
+        src: "/img/background.jpg",
+      },
+      {
+        src: "/img/background.jpg",
+      },
+    ];
+
+    return {
+      items,
+    };
   },
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .header {
-  position: relative;
-  text-shadow: 2px 2px 4px #111;
-  color: white;
+  &-text {
+    background: linear-gradient(180deg, #086500 0%, rgba(8, 101, 0, 0.8) 100%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: white;
+    padding: 30px;
+    z-index: 100;
 
-  h1 {
-    font-size: 40px;
-    letter-spacing: 3px;
-    line-height: 50px;
-  }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 320px;
 
-  p {
-    width: 60%;
-    font-size: 18px;
-    margin: 0 auto;
-    margin-top: 30px;
-  }
+    &-heading {
+      line-height: 30px;
 
-  @media (min-width: 960px) {
-    line-height: 60px;
-
-    h1 {
-      font-size: 58px;
+      h1 {
+        margin: 0;
+        font-size: 36px;
+        text-shadow: 2px 2px 4px rgb(30, 30, 30);
+      }
     }
 
     p {
-      width: 100%;
-      margin: 0;
-      font-size: 20px;
+      font-size: 14px;
+    }
+  }
+
+  .v-window__controls {
+    .v-btn {
+      background: none;
+      color: white;
+      box-shadow: none;
+
+      @media (max-width: 769px) {
+        position: absolute;
+        bottom: 10px;
+
+        &:nth-child(1) {
+          left: 10px;
+        }
+
+        &:nth-child(2) {
+          right: 10px;
+        }
+      }
     }
   }
 }

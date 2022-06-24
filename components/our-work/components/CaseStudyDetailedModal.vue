@@ -56,7 +56,7 @@ export default defineComponent({
   },
 });
 </script>
-
+<!-- 
 <style lang="scss">
 .case-study-modal {
   &-img {
@@ -77,4 +77,4 @@ export default defineComponent({
 .v-window {
   height: max-content !important;
 }
-</style>
+</style> -->
