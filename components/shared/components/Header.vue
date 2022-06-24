@@ -1,6 +1,6 @@
 <template>
   <div style="position: relative">
-    <v-carousel class="header" height="500" cycle hide-delimiters>
+    <v-carousel class="header" height="600" cycle hide-delimiters>
       <v-carousel-item
         :src="item.src"
         v-for="(item, i) in items"

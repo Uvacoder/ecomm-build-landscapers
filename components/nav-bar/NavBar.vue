@@ -35,10 +35,7 @@
       </v-app-bar>
     </v-card>
 
-    <mobile-nav-bar
-      :is-open="isNavDrawerOpen && isMobile"
-      @close-modal="isNavDrawerOpen = !isNavDrawerOpen"
-    />
+    <mobile-nav-bar v-if="isMobile" v-model="isNavDrawerOpen" />
   </nav>
 </template>
 

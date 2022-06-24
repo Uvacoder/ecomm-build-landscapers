@@ -1,5 +1,10 @@
 <template>
-  <v-navigation-drawer v-model="isOpen" class="pt-6 w-100" location="right" app>
+  <v-navigation-drawer
+    :model-value="modelValue"
+    class="pt-6 w-80"
+    location="right"
+    @update:model-value="closeModal"
+  >
     <template v-slot:prepend>
       <v-list>
         <v-list-item
@@ -49,11 +54,12 @@ import { navLinksData, socialLinksData } from "./data/navLinks";
 export default defineComponent({
   name: "MobileNavBar",
   props: {
-    isOpen: {
+    modelValue: {
       type: Boolean,
       default: false,
     },
   },
+  emits: ["update:modelValue"],
   setup(props, context) {
     const route = useRoute();
     const router = useRouter();
@@ -73,7 +79,7 @@ export default defineComponent({
     };
 
     const closeModal = (): void => {
-      context.emit("close-modal");
+      context.emit("update:modelValue", false);
     };
 
     const currentRoute = (name: string): boolean => {
@@ -87,6 +93,7 @@ export default defineComponent({
       navLinks,
       socialLinks,
       currentYear,
+      closeModal,
       currentRoute,
       goToSocialLink,
       goToLink,
