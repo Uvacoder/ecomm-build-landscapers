@@ -1,8 +1,10 @@
 <template>
-  <v-navigation-drawer v-model="isOpen" class="pt-4" position="right" app>
+  <v-navigation-drawer v-model="isOpen" class="pt-6 w-100" location="right" app>
     <template v-slot:prepend>
-      <v-list class="pl-2">
+      <v-list>
         <v-list-item
+          class="justify-center text-20"
+          :class="{ 'text-primary': currentRoute(link.name) }"
           v-for="(link, i) in navLinks"
           :key="i"
           @click="goToLink(link.link)"
@@ -14,7 +16,8 @@
 
     <template v-slot:append>
       <div class="d-flex flex-wrap justify-center my-6" id="nav-bar-footer">
-        <div class="mb-4">
+        <!-- Add back in once facebook is re-created -->
+        <!-- <div class="mb-4">
           <v-icon
             v-for="(link, i) in socialLinks"
             :key="i"
@@ -24,14 +27,16 @@
           >
             {{ link.iconName }}
           </v-icon>
-        </div>
+        </div> -->
 
         <p class="disclaimer-text">
           Created by
           <a href="https://www.alexlong.dev" target="_blank"> Alex </a>
         </p>
 
-        <p class="disclaimer-text">&copy; 2022. Build A-Dream</p>
+        <p class="disclaimer-text">
+          &copy; {{ currentYear }} Build A-Dream Landscape Gardeners
+        </p>
       </div>
     </template>
   </v-navigation-drawer>
@@ -50,9 +55,12 @@ export default defineComponent({
     },
   },
   setup(props, context) {
+    const route = useRoute();
     const router = useRouter();
+
     const navLinks: NavLinks[] = navLinksData;
     const socialLinks: SocialNavLinks[] = socialLinksData;
+    const currentYear: number = new Date().getFullYear();
 
     const goToSocialLink = (link: string): void => {
       window.open(link);
@@ -68,9 +76,18 @@ export default defineComponent({
       context.emit("close-modal");
     };
 
+    const currentRoute = (name: string): boolean => {
+      return (
+        route.path === name.toLowerCase() ||
+        (name.toLowerCase() === "home" && route.path === "/")
+      );
+    };
+
     return {
       navLinks,
       socialLinks,
+      currentYear,
+      currentRoute,
       goToSocialLink,
       goToLink,
     };
