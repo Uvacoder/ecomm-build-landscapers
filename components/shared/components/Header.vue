@@ -15,17 +15,9 @@
         <p>Dream gardens that don't cost the earth</p>
       </div>
 
-      <!-- <p class="my-4">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent proin
-        ac bibend id ut ut suspendisse.
-      </p> -->
-
-      <!-- <div class="d-flex align-center mt-8">
-        <v-btn color="white" class="text-primary mr-1" density="comfortable">
-          Contact us
-        </v-btn>
+      <div class="d-flex justify-center mt-4">
         <v-btn variant="outlined" density="comfortable"> View our work </v-btn>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
