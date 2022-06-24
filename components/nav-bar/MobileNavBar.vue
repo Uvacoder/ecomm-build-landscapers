@@ -9,7 +9,7 @@
       <v-list>
         <v-list-item
           class="justify-center text-20"
-          :class="{ 'text-primary': currentRoute(link.name) }"
+          :class="{ 'text-primary': link.active }"
           v-for="(link, i) in navLinks"
           :key="i"
           @click="goToLink(link.link)"
@@ -64,7 +64,7 @@ export default defineComponent({
     const route = useRoute();
     const router = useRouter();
 
-    const navLinks: NavLinks[] = navLinksData;
+    const navLinks = ref<NavLinks[]>([]);
     const socialLinks: SocialNavLinks[] = socialLinksData;
     const currentYear: number = new Date().getFullYear();
 
@@ -82,19 +82,18 @@ export default defineComponent({
       context.emit("update:modelValue", false);
     };
 
-    const currentRoute = (name: string): boolean => {
-      return (
-        route.path === name.toLowerCase() ||
-        (name.toLowerCase() === "home" && route.path === "/")
-      );
+    const setActiveRoute = (path: string): void => {
+      navLinks.value = JSON.parse(JSON.stringify([...navLinksData]));
+      navLinks.value.find((link) => link.link === path).active = true;
     };
+
+    watch(route, () => setActiveRoute(route.path), { immediate: true });
 
     return {
       navLinks,
       socialLinks,
       currentYear,
       closeModal,
-      currentRoute,
       goToSocialLink,
       goToLink,
     };
